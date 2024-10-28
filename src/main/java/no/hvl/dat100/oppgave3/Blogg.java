@@ -6,45 +6,75 @@ import no.hvl.dat100.oppgave1.*;
 public class Blogg {
 
 	// TODO: objektvariable 
+	protected Innlegg[] innleggtabell;
+	protected int nesteLedig;
 
 	public Blogg() {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
+		this.innleggtabell = new Innlegg[20];
+		this.nesteLedig = 0;
 	}
 
 	public Blogg(int lengde) {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
+		this.innleggtabell = new Innlegg[lengde];
+		this.nesteLedig= 0;
 	}
 
 	public int getAntall() {
-		throw new UnsupportedOperationException(TODO.method());
+		return nesteLedig;
+			
 	}
 	
 	public Innlegg[] getSamling() {
-		throw new UnsupportedOperationException(TODO.method());
+		return innleggtabell;
 
 	}
 	
 	public int finnInnlegg(Innlegg innlegg) {
-
-		throw new UnsupportedOperationException(TODO.method());
+		int finnesDet = 0;
+		for (int i = 0; i < nesteLedig; i++) 
+				if (innleggtabell[i].erLik(innlegg)) {
+					finnesDet = i;
+					break;
+			} else {
+		finnesDet = -1;
+			}
+		return finnesDet;
 	}
-
+	
 	public boolean finnes(Innlegg innlegg) {
-		throw new UnsupportedOperationException(TODO.method());
-	}
-
+		for (int i = 0; i <innleggtabell.length; i++) {
+			if (innleggtabell[i] != null && innleggtabell[i].getId() == innlegg.getId()) {
+				return true;
+			}
+		}
+		return false;
+		}
+	
 	public boolean ledigPlass() {
-		throw new UnsupportedOperationException(TODO.method());
+		if (nesteLedig < innleggtabell.length) {
+			return true;
+		}
+		return false;
 
 	}
 	
 	public boolean leggTil(Innlegg innlegg) {
-
-		throw new UnsupportedOperationException(TODO.method());
+		if (nesteLedig < innleggtabell.length) {
+			innleggtabell[nesteLedig] = innlegg;
+			nesteLedig ++;
+			return true;
+		} else {
+			return false;
+		}
+		
 	}
 	
 	public String toString() {
-		throw new UnsupportedOperationException(TODO.method());
+		String tilStreng = nesteLedig + "\n";
+		for (int i = 0; i < innleggtabell.length; i++) {
+			tilStreng += innleggtabell[i] + "\n";
+		}
+		return tilStreng;
 	}
 
 	// valgfrie oppgaver nedenfor
